@@ -329,7 +329,7 @@ $('logoutBtn').addEventListener('click', function(){
 });
 async function loadDevices(){
   const c = $('deviceListContainer');
-  c.innerHTML = '<div class="loading">LOADING</div>';
+  c.innerHTML = '<div class="loading">SCANNING...</div>';
   try{
     const adminParam = state.isAdmin ? '&admin=1' : '';
     const r = await fetch(SERVER+'/clients?wallet='+encodeURIComponent(state.userId)+adminParam);
