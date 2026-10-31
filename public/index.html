@@ -232,7 +232,10 @@
   </div>
 
   <div class="screen active" id="screenList">
-    <div class="page-title">DEVICES</div>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+  <div class="page-title">DEVICES</div>
+  <button onclick="loadDevices()" style="background:var(--card); border:1px solid var(--border); color:var(--accent-2); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; letter-spacing:0.1em;">🔄 REFRESH</button>
+</div>
     <div class="page-sub">YOUR CONNECTED TARGETS</div>
     <div id="deviceListContainer"><div class="loading">LOADING</div></div>
   </div>
